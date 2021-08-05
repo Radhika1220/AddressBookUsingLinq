@@ -65,6 +65,20 @@ namespace TestValidation
             var actual = contactData.RetrieveDataBasedOnCityorState("Che", "Tami");
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void TestMethodForCountTheStateAndCity()
+        {
+            var expected = "2 1 ";
+            var actual = contactData.RetrieveCountBasedOnCityorState();
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TestMethodForCountTheStateAndCity1()
+        {
+            string expected = null;
+            var actual = contactData.RetrieveCountBasedOnCityorState();
+            Assert.AreEqual(expected, actual);
+        }
     }
 
 }
