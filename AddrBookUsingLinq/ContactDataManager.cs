@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace AddrBookUsingLinq
@@ -127,10 +128,27 @@ namespace AddrBookUsingLinq
             dtRow["PhoneNumber"] = contactDataManager.phoneNumber;
             dtRow["Email"] = contactDataManager.emailId;
             dataTable.Rows.Add(dtRow);
-
+        }
+        /// <summary>
+        /// UC4--->Edit the existing contact using their name
+        /// </summary>
+        /// <param name="FirstName"></param>
+        /// <param name="ColumnName"></param>
+        /// <returns></returns>
+        public bool ModifyDataTableUsingName(string FirstName, string ColumnName)
+        {
+            AddValues();
+            var modifiedList = (from Contact in dataTable.AsEnumerable() where Contact.Field<string>("FirstName") == FirstName select Contact).LastOrDefault();
+            if (modifiedList != null)
+            {
+                modifiedList[ColumnName] = "Simha";
+                DisplayDetails();
+                return true;
+            }
+            return false;
         }
         //Display all Values in Table
-        public void Display()
+        public void DisplayDetails()
         {
             foreach (DataRow dtRows in dataTable.Rows)
             {

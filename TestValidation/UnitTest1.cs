@@ -25,5 +25,15 @@ namespace TestValidation
             int actual = contactData.AddValues();
             Assert.AreEqual(actual, expected);
         }
+        /// <summary>
+        /// UC4--->Edit the existing contact using their name
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForModifyDetailsUsingName()
+        {
+            bool expected = true;
+            var actual = contactData.ModifyDataTableUsingName("Priya", "LastName");
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

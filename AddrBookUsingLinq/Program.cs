@@ -10,10 +10,11 @@ namespace AddrBookUsingLinq
 
             //Creating object for ContactDataManager 
             ContactDataManager contactDataManager = new ContactDataManager();
-            contactDataManager.CreateDataTable();
-            contactDataManager.AddValues();
-            contactDataManager.Display();
-
+            //contactDataManager.CreateDataTable();
+            //contactDataManager.AddValues();
+            //contactDataManager.Display();
+            //ContactData contactData = new ContactData();
+            contactDataManager.ModifyDataTableUsingName("Priya","LastName");
         }
     }
 }
