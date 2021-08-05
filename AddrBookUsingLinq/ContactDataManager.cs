@@ -108,6 +108,16 @@ namespace AddrBookUsingLinq
             contactDataManagers.state = "Tamilnadu";
             contactDataManagers.zipCode = 600014;
             InsertintoDataTable(contactDataManagers);
+
+            contactDataManagers.firstName = "Vishnu";
+            contactDataManagers.lastName = "Priya";
+            contactDataManagers.phoneNumber = 8975214458;
+            contactDataManagers.emailId = "vishnu@gmail.com";
+            contactDataManagers.address = "Sjce Campus Road.";
+            contactDataManagers.city = "Mysore";
+            contactDataManagers.state = "Karanataka";
+            contactDataManagers.zipCode = 542874;
+            InsertintoDataTable(contactDataManagers);
             //Returning the count of inserted data
             return dataTable.Rows.Count;
         }
@@ -138,7 +148,7 @@ namespace AddrBookUsingLinq
         public bool ModifyDataTableUsingName(string FirstName, string ColumnName)
         {
             AddValues();
-            var modifiedList = (from Contact in dataTable.AsEnumerable() where Contact.Field<string>("FirstName") == FirstName select Contact).LastOrDefault();
+            var modifiedList = (from Contact in dataTable.AsEnumerable() where Contact.Field<string>("FirstName") == FirstName select Contact).FirstOrDefault();
             if (modifiedList != null)
             {
                 modifiedList[ColumnName] = "Simha";
@@ -146,6 +156,26 @@ namespace AddrBookUsingLinq
                 return true;
             }
             return false;
+        }
+        /// <summary>
+        /// UC5--->Delete a Person Using FirstName Column
+        /// </summary>
+        /// <param name="FirstName"></param>
+        /// <returns></returns>
+        public bool DeleteRecordUsingName(string FirstName)
+        {
+            //Calling the add values to data table
+            AddValues();
+            //performing delete operation using linq
+            var modifiedList = (from Contact in dataTable.AsEnumerable() where Contact.Field<string>("FirstName") == FirstName select Contact).FirstOrDefault();
+            if (modifiedList != null)
+            {
+                modifiedList.Delete();
+                Console.WriteLine("******* After Deletion ******");
+                DisplayDetails();
+                return true;
+            }
+             return false;
         }
         //Display all Values in Table
         public void DisplayDetails()

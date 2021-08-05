@@ -12,9 +12,10 @@ namespace AddrBookUsingLinq
             ContactDataManager contactDataManager = new ContactDataManager();
             //contactDataManager.CreateDataTable();
             //contactDataManager.AddValues();
-            //contactDataManager.Display();
-            //ContactData contactData = new ContactData();
+            //contactDataManager.DisplayDetails();
+
             contactDataManager.ModifyDataTableUsingName("Priya","LastName");
+            contactDataManager.DeleteRecordUsingName("Vishnu");
         }
     }
 }
