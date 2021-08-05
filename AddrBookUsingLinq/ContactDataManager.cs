@@ -202,10 +202,16 @@ namespace AddrBookUsingLinq
             }
             return nameList;
         }
+        /// <summary>
+        /// UC7--->Count the City and State 
+        /// </summary>
+        /// <returns></returns>
         public string RetrieveCountBasedOnCityorState()
         {
+            //Calling the AddValues method to add data in table
             AddValues();
             string result = "";
+           
             var modifiedList = (from Contact in dataTable.AsEnumerable().GroupBy(r => new { City = r["City"],StateName = r["State"] }) select Contact);
             Console.WriteLine("*****After Count of City And State");
             foreach (var i in modifiedList)
@@ -214,20 +220,37 @@ namespace AddrBookUsingLinq
                 Console.WriteLine("Count Key" + i.Key);
                 foreach (var dtRows in i)
                 {
-                    if (dtRows != null)
-                    {
-                        Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
-                    }
-
-                    else
-                    {
-                        result = null;
-                    }
+                  Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
                 }
             }
             Console.WriteLine(result);
             return result;
-            
+        }
+      
+        /// <summary>
+        /// UC8--->Sorted the entries based on name and given city
+        /// </summary>
+        /// <param name="CityName"></param>
+        /// <returns></returns>
+        public string SortBasedOnNameInDataTable(string CityName)
+        {
+            AddValues();
+            string result = null;
+            var modifiedRecord = (from Contact in dataTable.AsEnumerable() orderby Contact.Field<string>("FirstName") where Contact.Field<string>("City") == CityName select Contact);
+            Console.WriteLine("****After Sorting Their Name For a given city*********");
+            foreach (var dtRows in modifiedRecord)
+            {
+                if (dtRows != null)
+                {
+                    Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7}\n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+                    result += dtRows["FirstName"] + " ";
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            return result;
         }
         //Display all Values in Table
         public void DisplayDetails()

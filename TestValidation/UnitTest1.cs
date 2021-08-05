@@ -65,6 +65,9 @@ namespace TestValidation
             var actual = contactData.RetrieveDataBasedOnCityorState("Che", "Tami");
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC7--->Count the City and State 
+        /// </summary>
         [TestMethod]
         public void TestMethodForCountTheStateAndCity()
         {
@@ -72,11 +75,24 @@ namespace TestValidation
             var actual = contactData.RetrieveCountBasedOnCityorState();
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC8---Sorted the entries based on name and given city
+        /// </summary>
         [TestMethod]
-        public void TestMethodForCountTheStateAndCity1()
+        public void TestMethodForSortBasedOnNameForGivenCity()
+        {
+            string expected = "Priya Radhika ";
+            string actual = contactData.SortBasedOnNameInDataTable("Chennai");
+            Assert.AreEqual(expected, actual);
+        }
+        /// <summary>
+        /// UC8--->Given a wrong cityname and returns null
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForSortBasedOnNameForGivenCity1()
         {
             string expected = null;
-            var actual = contactData.RetrieveCountBasedOnCityorState();
+            string actual = contactData.SortBasedOnNameInDataTable("Chen");
             Assert.AreEqual(expected, actual);
         }
     }

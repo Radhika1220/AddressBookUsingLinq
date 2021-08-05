@@ -17,7 +17,8 @@ namespace AddrBookUsingLinq
             //contactDataManager.ModifyDataTableUsingName("Priya","LastName");
             //contactDataManager.DeleteRecordUsingName("Vishnu");
             //contactDataManager.RetrieveDataBasedOnCityorState("Chennai", "TamilNadu");
-            contactDataManager.RetrieveCountBasedOnCityorState();
+           // contactDataManager.RetrieveCountBasedOnCityorState();
+            contactDataManager.SortBasedOnNameInDataTable("Chennai");
         }
     }
 }
