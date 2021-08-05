@@ -10,8 +10,8 @@ namespace AddrBookUsingLinq
 
             //Creating object for ContactDataManager 
             ContactDataManager contactDataManager = new ContactDataManager();
-            //contactDataManager.CreateDataTable();
-            //contactDataManager.AddValues();
+            contactDataManager.CreateDataTable();
+            contactDataManager.AddValues();
 
 
             // //contactDataManager.ModifyDataTableUsingName("Priya","LastName");
@@ -19,7 +19,7 @@ namespace AddrBookUsingLinq
             // //contactDataManager.RetrieveDataBasedOnCityorState("Chennai", "TamilNadu");
             //// contactDataManager.RetrieveCountBasedOnCityorState();
             // contactDataManager.SortBasedOnNameInDataTable("Chennai");
-            contactDataManager.RetrieveCountBasedOnContactType();
+            //contactDataManager.RetrieveCountBasedOnContactType();
         }
     }
 }

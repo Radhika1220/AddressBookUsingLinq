@@ -136,6 +136,18 @@ namespace AddrBookUsingLinq
             contactDataManagers.contactId = 2;
             contactDataManagers.contactType = "Friend";
             dataTable=InsertintoDataTable(contactDataManagers);
+
+            contactDataManagers.firstName = "Vishnu";
+            contactDataManagers.lastName = "Priya";
+            contactDataManagers.phoneNumber = 8975214458;
+            contactDataManagers.emailId = "vishnu@gmail.com";
+            contactDataManagers.address = "Sjce Campus Road.";
+            contactDataManagers.city = "Mysore";
+            contactDataManagers.state = "Karanataka";
+            contactDataManagers.zipCode = 542874;
+            contactDataManagers.contactId = 3;
+            contactDataManagers.contactType = "Family";
+            dataTable = InsertintoDataTable(contactDataManagers);
             DisplayDetails(dataTable);
             //Returning the count of inserted data
             return dataTable.Rows.Count;
