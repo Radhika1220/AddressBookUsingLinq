@@ -16,6 +16,9 @@ namespace AddrBookUsingLinq
         public int zipCode { get; set; }
         public string emailId { get; set; }
 
+        public int contactId { get; set; }
+        public string contactType { get; set; }
+
     }
 }
 

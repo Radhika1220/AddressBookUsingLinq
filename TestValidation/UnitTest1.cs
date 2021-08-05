@@ -95,6 +95,16 @@ namespace TestValidation
             string actual = contactData.SortBasedOnNameInDataTable("Chen");
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC10--->Retrieve Based On Contact type
+        /// </summary>
+        [TestMethod]
+        public void TestMethodToRetrieveCountOfContactType()
+        {
+            string expected = "1 2 ";
+            string actual = contactData.RetrieveCountBasedOnContactType();
+            Assert.AreEqual(expected, actual);
+        }
     }
 
 }

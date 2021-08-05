@@ -72,7 +72,19 @@ namespace AddrBookUsingLinq
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(Int64);
             dtColumn.ColumnName = "Zip";
-            dtColumn.Caption = "Zip";
+            dtColumn.AutoIncrement = false;
+            dataTable.Columns.Add(dtColumn);
+
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(Int64);
+            dtColumn.ColumnName = "ContactId";
+            dtColumn.AutoIncrement = false;
+            dataTable.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(string);
+            dtColumn.ColumnName = "ContactType";
             dtColumn.AutoIncrement = false;
             dataTable.Columns.Add(dtColumn);
 
@@ -85,7 +97,7 @@ namespace AddrBookUsingLinq
             //Create Object for DataTable for adding tow values in table
             ContactData contactDataManager = new ContactData();
             ContactData contactDataManagers = new ContactData();
-
+       
             //Insert Values into Table
             contactDataManager.firstName = "Radhika";
             contactDataManager.lastName = "Shankar";
@@ -95,9 +107,11 @@ namespace AddrBookUsingLinq
             contactDataManager.city = "Chennai";
             contactDataManager.state = "Tamilnadu";
             contactDataManager.zipCode = 600132;
+            contactDataManager.contactId = 1;
+            contactDataManager.contactType = "Profession";
             //Calling the insert table to insert the data 
-            InsertintoDataTable(contactDataManager);
-
+            dataTable=InsertintoDataTable(contactDataManager);
+        
             //Insert Values into Table
             contactDataManagers.firstName = "Priya";
             contactDataManagers.lastName = "venkat";
@@ -107,8 +121,10 @@ namespace AddrBookUsingLinq
             contactDataManagers.city = "Chennai";
             contactDataManagers.state = "Tamilnadu";
             contactDataManagers.zipCode = 600014;
-            InsertintoDataTable(contactDataManagers);
-
+            contactDataManagers.contactId = 2;
+            contactDataManagers.contactType = "Friend";
+            dataTable=InsertintoDataTable(contactDataManagers);
+         
             contactDataManagers.firstName = "Vishnu";
             contactDataManagers.lastName = "Priya";
             contactDataManagers.phoneNumber = 8975214458;
@@ -117,7 +133,10 @@ namespace AddrBookUsingLinq
             contactDataManagers.city = "Mysore";
             contactDataManagers.state = "Karanataka";
             contactDataManagers.zipCode = 542874;
-            InsertintoDataTable(contactDataManagers);
+            contactDataManagers.contactId = 2;
+            contactDataManagers.contactType = "Friend";
+            dataTable=InsertintoDataTable(contactDataManagers);
+            DisplayDetails(dataTable);
             //Returning the count of inserted data
             return dataTable.Rows.Count;
         }
@@ -126,7 +145,7 @@ namespace AddrBookUsingLinq
         /// </summary>
         /// <param name="contactDataManager"></param>
         //Insert values in Data Table
-        public void InsertintoDataTable(ContactData contactDataManager)
+        public DataTable InsertintoDataTable(ContactData contactDataManager)
         {
             DataRow dtRow = dataTable.NewRow();
             dtRow["FirstName"] = contactDataManager.firstName;
@@ -137,7 +156,10 @@ namespace AddrBookUsingLinq
             dtRow["Zip"] = contactDataManager.zipCode;
             dtRow["PhoneNumber"] = contactDataManager.phoneNumber;
             dtRow["Email"] = contactDataManager.emailId;
+            dtRow["ContactId"] = contactDataManager.contactId;
+            dtRow["ContactType"] = contactDataManager.contactType;
             dataTable.Rows.Add(dtRow);
+            return dataTable;
         }
         /// <summary>
         /// UC4--->Edit the existing contact using their name
@@ -152,7 +174,7 @@ namespace AddrBookUsingLinq
             if (modifiedList != null)
             {
                 modifiedList[ColumnName] = "Simha";
-                DisplayDetails();
+                //DisplayDetails();
                 return true;
             }
             return false;
@@ -172,7 +194,8 @@ namespace AddrBookUsingLinq
             {
                 modifiedList.Delete();
                 Console.WriteLine("******* After Deletion ******");
-                DisplayDetails();
+
+                DisplayDetails(dataTable);
                 return true;
             }
              return false;
@@ -252,13 +275,35 @@ namespace AddrBookUsingLinq
             }
             return result;
         }
+        /// <summary>
+        /// UC10--->Retrieve Based On Contact type
+        /// </summary>
+        /// <returns></returns>
+        public string RetrieveCountBasedOnContactType()
+        {
+            AddValues();
+            string result = null;
+            var modifiedList = (from Contact in dataTable.AsEnumerable().GroupBy(r => new { ContactType = r["ContactType"] }) select Contact);
+            Console.WriteLine("*******Äfter Group by the count*****");
+            foreach (var j in modifiedList)
+            {
+                result += j.Count() + " ";
+                Console.WriteLine("Count Key" + j.Key);
+                foreach (var dtRows in j)
+                {
+                    Console.WriteLine("{0} | {1} | {2} | {3} |  {4} |  {5} |  {6} | {7} | {8} | {9}\n", dtRows["ContactId"], dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"], dtRows["ContactType"]);
+                }
+                Console.WriteLine(result);
+            }
+            return result;
+        }
         //Display all Values in Table
-        public void DisplayDetails()
+        public void DisplayDetails(DataTable dataTable)
         {
             foreach (DataRow dtRows in dataTable.Rows)
             {
                 Console.WriteLine("-------------Insert the values in datatable------------");
-                Console.WriteLine("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7}\n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} \n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"],dtRows["ContactId"],dtRows["ContactType"]);
             }
         }
     }

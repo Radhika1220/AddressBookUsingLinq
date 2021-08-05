@@ -12,13 +12,14 @@ namespace AddrBookUsingLinq
             ContactDataManager contactDataManager = new ContactDataManager();
             //contactDataManager.CreateDataTable();
             //contactDataManager.AddValues();
-            //contactDataManager.DisplayDetails();
 
-            //contactDataManager.ModifyDataTableUsingName("Priya","LastName");
-            //contactDataManager.DeleteRecordUsingName("Vishnu");
-            //contactDataManager.RetrieveDataBasedOnCityorState("Chennai", "TamilNadu");
-           // contactDataManager.RetrieveCountBasedOnCityorState();
-            contactDataManager.SortBasedOnNameInDataTable("Chennai");
+
+            // //contactDataManager.ModifyDataTableUsingName("Priya","LastName");
+            // //contactDataManager.DeleteRecordUsingName("Vishnu");
+            // //contactDataManager.RetrieveDataBasedOnCityorState("Chennai", "TamilNadu");
+            //// contactDataManager.RetrieveCountBasedOnCityorState();
+            // contactDataManager.SortBasedOnNameInDataTable("Chennai");
+            contactDataManager.RetrieveCountBasedOnContactType();
         }
     }
 }
