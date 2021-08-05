@@ -45,6 +45,26 @@ namespace TestValidation
             var actual = contactData.DeleteRecordUsingName("Vishnu");
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC6-->Retrieve the data based on state or city
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForRetrieveRecordBasedOnStateOrCity()
+        {
+            string expected = "Radhika Priya ";
+            var actual = contactData.RetrieveDataBasedOnCityorState("Chennai", "Tamilnadu");
+            Assert.AreEqual(expected, actual);
+        }
+        /// <summary>
+        /// UC6-->Giving the wrong statename and city
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForWrongStateNameOrCity()
+        {
+            string expected = null;
+            var actual = contactData.RetrieveDataBasedOnCityorState("Che", "Tami");
+            Assert.AreEqual(expected, actual);
+        }
     }
 
 }
